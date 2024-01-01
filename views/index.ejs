@@ -16,17 +16,25 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td>
-                <a href="" class="text-success"><i class="fas fa-edit fa-lg mx-1"></i></a>
-                <a href="" class="text-danger"><i class="fas fa-trash fa-lg mx-1"></i></a>
-              </td>
-            </tr>
+            <% if (users && users.length > 0) { %>
+              <% users.forEach(user => { %>
+                  <tr>
+                      <td><%= user._id %></td>
+                      <td> <img src="<%= user.image %>" alt="" width="50%" class="img-thumbnail"></td>
+                      <td><%= user.name %></td>
+                      <td><%= user.email %></td>
+                      <td><%= user.phone %></td>
+                      <td>
+                          <a href="/edit/<%= user._id %>" class="text-success"><i class="fas fa-edit fa-lg mx-1"></i></a>
+                          <a href="/delete/<%= user._id %>" class="text-danger"><i class="fas fa-trash fa-lg mx-1"></i></a>
+                      </td>
+                  </tr>
+              <% }); %>
+          <% } else { %>
+              <tr>
+                  <td colspan="6">No users found</td>
+              </tr>
+          <% } %>
           </tbody>
 
         </table>

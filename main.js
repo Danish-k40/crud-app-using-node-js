@@ -3,7 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose  = require('mongoose');
 const session = require('express-session');
-
+const User = require('./models/users');
 const app = express();
 const PORT = process.env.PORT || 4000;
 
@@ -14,6 +14,7 @@ mongoose.connect(process.env.DB_URI);
 const db = mongoose.connection;
 db.on('error', (error) => console.log(error))
 db.once('open', () => console.log("connected to database"))
+app.use(express.static('uploads'))
 
 // middlewares
 
@@ -44,5 +45,5 @@ app.use("", require("./routes/routes"))
 
 
 app.listen(PORT, () => {
-    console.log(`server started at htttp://localhost:${PORT}`)
+    console.log(`server started at http://localhost:${PORT}`)
 })
